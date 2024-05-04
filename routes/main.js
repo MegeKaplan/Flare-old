@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router()
 
-const { login } = require("../controllers/auth")
+const { login, register } = require("../controllers/auth")
 
 
 
@@ -14,14 +14,19 @@ router.get("/login", (req, res) => {
     res.render("login")
 })
 
-router.post("/login", async(req, res) => {
+router.get("/register", (req, res) => {
+    res.render("register")
+})
+
+router.post("/register", async(req, res) => {
     var userdata = {
         username: req.body.username,
         password: req.body.password,
+        email: req.body.email,
     }
     res.cookie("userdata", userdata, { maxAge: 900000, httpOnly: true });
-    login(userdata)
-    res.redirect("/")
+    register(userdata)
+    // res.redirect("/")
 })
 
 
