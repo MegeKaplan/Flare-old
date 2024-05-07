@@ -1,4 +1,2 @@
-node_modules/
-config.js
-plan.txt
-structure.txt
+/node_modules
+.env
