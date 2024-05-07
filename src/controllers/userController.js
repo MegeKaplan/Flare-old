@@ -2,7 +2,7 @@
 
 
 export const userList = (req, res) => {
-    res.send('user list');
+    res.render("users", {title: "Users"});
 };
 
 export const userProfile = (req, res) => {

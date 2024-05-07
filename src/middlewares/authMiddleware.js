@@ -2,7 +2,9 @@ const authMiddleware = (req, res, next) => {
     if (req.session && req.session.user) {
       next();
     } else {
-      res.redirect('/login');
+      // res.send("user not auth")
+      next()
+      // res.redirect('/auth/login');
     }
 }
 

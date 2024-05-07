@@ -13,11 +13,13 @@ const __dirname = dirname(new URL(import.meta.url).pathname);
 app.use(express.static("public"))
 app.set('views', join(__dirname, 'src', 'views'))
 
-// Import routes
-import users from "./src/routes/users.js"
 
 // Import middlewares
 import authMiddleware from "./src/middlewares/authMiddleware.js";
+
+// Import routes
+import users from "./src/routes/users.js"
+import auth from "./src/routes/auth.js"
 
 
 // Use middlewares
@@ -26,6 +28,7 @@ app.use(authMiddleware)
 
 // Use routes
 app.use("/users", users)
+app.use("/auth", auth)
 
 
 // Render home
