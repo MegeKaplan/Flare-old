@@ -24,6 +24,7 @@ import auth from "./src/routes/auth.js"
 
 // Use middlewares
 app.use(authMiddleware)
+app.use(express.urlencoded({extended:true}))
 
 
 // Use routes
