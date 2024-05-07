@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "name": "flare",
   "version": "1.0.0",
   "description": "Social Media App",
