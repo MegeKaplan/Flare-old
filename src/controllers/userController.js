@@ -1,5 +1,6 @@
 
 import appwriteService from "../services/appwriteService.js";
+import config from "../config.js";
 
 export const userList = (req, res) => {
     res.render("users", {title: "Users"});
@@ -15,16 +16,14 @@ export const userCreate = (req, res) => {
 }
 
 export const userLogin = async (req, res) => {
-    console.log("--------------TEST");
-    const currentuser = await appwriteService.loginUser(req.body)
-    console.log(currentuser);
-    req.session.currentuser = currentuser
+    const currentUser = await appwriteService.loginUser(req.body)
+    res.cookie('currentUser', currentUser, { maxAge: config.cookie.maxAge, httpOnly: true })
     res.sendStatus(200)
 }
 
 export const userGet = (req, res) => {
-    appwriteService.getCurrentUser()
-    res.sendStatus(200)
+    const currentUser = req.cookies.currentUser
+    res.json(currentUser)
 }
 
 

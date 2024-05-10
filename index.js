@@ -1,6 +1,7 @@
 // Import modules
 import express from "express"
 import session from 'express-session';
+import cookieParser from 'cookie-parser';
 import { join, dirname } from 'path'
 import config from './src/config.js'
 
@@ -30,8 +31,12 @@ app.use(express.urlencoded({extended:true}))
 app.use(session({
     secret: config.session.secret,
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    cookie: {
+        maxAge: -1
+    }
 }));
+app.use(cookieParser());
 
 
 // Use routes
