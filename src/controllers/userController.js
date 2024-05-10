@@ -10,10 +10,25 @@ export const userProfile = (req, res) => {
 };
 
 export const userCreate = (req, res) => {
-    console.log("create user func");
     appwriteService.createUser(req.body)
     res.sendStatus(200)
 }
+
+export const userLogin = async (req, res) => {
+    console.log("--------------TEST");
+    const currentuser = await appwriteService.loginUser(req.body)
+    console.log(currentuser);
+    req.session.currentuser = currentuser
+    res.sendStatus(200)
+}
+
+export const userGet = (req, res) => {
+    appwriteService.getCurrentUser()
+    res.sendStatus(200)
+}
+
+
+
 
 
 

@@ -1,6 +1,8 @@
 // Import modules
 import express from "express"
+import session from 'express-session';
 import { join, dirname } from 'path'
+import config from './src/config.js'
 
 // Set express app
 const app = express()
@@ -25,6 +27,11 @@ import auth from "./src/routes/auth.js"
 // Use middlewares
 app.use(authMiddleware)
 app.use(express.urlencoded({extended:true}))
+app.use(session({
+    secret: config.session.secret,
+    resave: false,
+    saveUninitialized: false
+}));
 
 
 // Use routes

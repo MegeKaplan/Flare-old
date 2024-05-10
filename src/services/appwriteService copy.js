@@ -1,28 +1,64 @@
 // appwriteService.js
 
-import { Appwrite } from 'appwrite';
+import { Appwrite, Account } from 'appwrite';
 import config from '../config.js';
 
-const appwrite = new Appwrite();
-appwrite
+const client = new Appwrite();
+client
     .setEndpoint(config.appwrite.endpoint)
     .setProject(config.appwrite.projectId)
     // .setKey(config.appwrite.apiKey);
 
-const database = appwrite.database;
+const database = client.database;
+
+const account = new Account(client);
 
 const appwriteService = {
     // create user
-    createUser: async (email, password, name) => {
-        try {
-            const result = await database.createDocument(
-                config.appwrite.databaseId,
-                { email, password, name }
-            );
-            return result;
-        } catch (error) {
-            throw new Error(`Kullanıcı eklenirken bir hata oluştu: ${error.message}`);
+    createUser: async (userdata) => {
+        auth=false
+
+
+        // create account
+        var promise = account.create('[USER_ID]', 'email@example.com', '');
+
+        promise.then(function (response) {
+            console.log(response);
+        }, function (error) {
+            console.log(error);
+        });
+
+        // send verify email
+        // var promise = account.createVerification('localhost/verify');
+
+        // promise.then(function (response) {
+        //     console.log(response);
+        // }, function (error) {
+        //     console.log(error);
+        // });
+
+
+
+        // write database
+        if(auth){
+            try {
+                const result = await database.createDocument(
+                    config.appwrite.databaseId,
+                    userdata
+                );
+                return result;
+            } catch (error) {
+                throw new Error(`An error occurred: ${error.message}`);
+            }
         }
+
+    },
+
+    verifyAccount: async (userdata) => {
+        const session = await account.createSession(
+            userId,
+            '[SECRET]'
+        );
     },
 
     // Kullanıcı güncelleme
