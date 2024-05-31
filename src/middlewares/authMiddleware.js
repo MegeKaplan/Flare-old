@@ -1,17 +1,14 @@
 
-import appwriteService from "../services/appwriteService.js"
+import {userGet} from "../controllers/userController.js"
 
 
 const authMiddleware = (req, res, next) => {
-    // appwriteService.getUser()
+    if(req.cookies.currentUser){
+        console.log("user exist");
+    }else{
+        res.redirect("/auth/login")
+    }
     next()
-    // if (req.session && req.session.user) {
-    //   next();
-    // } else {
-    //   // res.send("user not auth")
-    //   next()
-    //   // res.redirect('/auth/login');
-    // }
 }
 
 

@@ -12,13 +12,13 @@ export const userProfile = (req, res) => {
 
 export const userCreate = (req, res) => {
     appwriteService.createUser(req.body)
-    res.sendStatus(200)
+    res.redirect("/")
 }
 
 export const userLogin = async (req, res) => {
     const currentUser = await appwriteService.loginUser(req.body)
     res.cookie('currentUser', currentUser, { maxAge: config.cookie.maxAge, httpOnly: true })
-    res.sendStatus(200)
+    res.redirect("/")
 }
 
 export const userGet = (req, res) => {

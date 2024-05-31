@@ -23,10 +23,10 @@ import authMiddleware from "./src/middlewares/authMiddleware.js";
 // Import routes
 import users from "./src/routes/users.js"
 import auth from "./src/routes/auth.js"
+import feed from "./src/routes/feed.js"
 
 
 // Use middlewares
-app.use(authMiddleware)
 app.use(express.urlencoded({extended:true}))
 app.use(session({
     secret: config.session.secret,
@@ -42,6 +42,7 @@ app.use(cookieParser());
 // Use routes
 app.use("/users", users)
 app.use("/auth", auth)
+app.use("/feed", feed)
 
 
 // Render home
