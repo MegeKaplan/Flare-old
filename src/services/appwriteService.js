@@ -10,6 +10,7 @@ client
     .setProject(config.appwrite.projectId)
     .setKey(config.appwrite.apiKey)
     .setSelfSigned(true)
+    .setSession("")
 
 
 const databases = new Databases(client);
@@ -23,7 +24,8 @@ const appwriteService = {
 
         // create account
         const userId = ID.unique()
-        const promise = await account.create(userId, userdata.email, userdata.password, userdata.username)
+        // const promise = await account.create(userId, userdata.email, userdata.password, userdata.username)
+        const promise = await account.create(userId, userdata.email, userdata.password)
         .then(function (response) {
             console.log(response);
             auth = true
@@ -88,10 +90,23 @@ const appwriteService = {
         }, function (error) {
             console.log(error); // Failure
         });
-        return "ghelo"
     },
 
-    logoutUser: async (userdata) => {
+    editUser: async (userID, editedUserData) => {
+        // edit user document
+        await databases.updateDocument(
+            config.appwrite.databaseId, // databaseId
+            config.appwrite.usersCollectionId, // collectionId
+            userID, // documentId
+            {username: editedUserData.username},
+        ).then((res) => {
+            console.log(res);
+        }, (err) => {
+            console.log(err);
+        })
+    },
+
+    logoutUser: async () => {
         console.log("logout user function");
     },
 

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%- username %>'s Profile</title>
+</head>
+<body>
+    <h1><%- $id %></h1>
+    <h1><%- email %></h1>
+    <h1><%- username %></h1>
+    <h1><%- password %></h1>
+    <form action="/users/<%- $id %>/edit/" method="post">
+        <input disabled type="email" placeholder="email" name="email" value="<%- email %>">
+        <input type="text" placeholder="username" name="username" value="<%- username %>">
+        <input disabled type="password" placeholder="current password" name="currentPassword" value="<%- password %>">
+        <input disabled type="password" placeholder="password" name="password" value="<%- password %>">
+        <button>Save</button>
+    </form>
+</body>
+</html>
