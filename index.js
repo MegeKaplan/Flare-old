@@ -47,7 +47,12 @@ app.use("/feed", feed)
 
 // Render home
 app.get("/", (req, res) => {
-    res.render("home", {title: "Home"})
+    var currentUser = req.cookies.currentUser
+    if(!currentUser){
+        currentUser = {"$id": 0}
+    }
+    console.log(currentUser);
+    res.render("home", {currentUser: currentUser})
 })
 
 

@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components{
+    /* html{
+        max-width: 600px;
+        max-height: 600px;
+        min-width: 100vw;
+        min-height: 100vh;
+    } */
+
+    .btn{
+        @apply bg-red-500
+    }
+
+    .logo{
+        color: #ffb62e;
+        font-family: cursive;
+        font-weight: 900;
+        font-size: 2rem;
+    }
+}

@@ -6,8 +6,9 @@ export const userList = (req, res) => {
     res.render("users", {title: "Users"});
 };
 
-export const userProfile = (req, res) => {
-    res.send(`user ${req.params.id} profile`)
+export const userProfile = async (req, res) => {
+    const userData = await appwriteService.getUser(req.params.id)
+    res.render("profile", userData)
 };
 
 export const userCreate = (req, res) => {
@@ -22,8 +23,8 @@ export const userLogin = async (req, res) => {
 }
 
 export const userGet = (req, res) => {
-    const currentUser = req.cookies.currentUser
-    res.json(currentUser)
+    const userData = {id:"dfd"}
+    res.json(userData)
 }
 
 

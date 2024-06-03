@@ -6,7 +6,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "watch": "npx tailwindcss -i ./src/style/tailwind.css -o ./public/style/style.css --minify -w",
+    "build": "npx tailwindcss -i ./src/style/tailwind.css -o ./public/style/style.css --minify"
   },
   "author": "MegeKaplan",
   "license": "ISC",

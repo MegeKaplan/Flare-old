@@ -1,13 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flare - <%= title %></title>
+    <title>Flare - Home</title>
     <%- include('./layouts/links.ejs') %>
 </head>
-<body>
-    <%- include('./layouts/nav.ejs') %>
-    <h1 class="text-3xl font-bold p-7 text-blue-900">Hello homepage!</h1>
+<body class="bg-slate-500 flex flex-col justify-center items-center h-full">
+    <!-- <%- include('./layouts/nav.ejs') %> -->
+
+    <header class="bg-blue-200 h-16 w-full flex flex-row justify-between items-center px-4">
+        <a href="/" class="logo">Flare</a>
+        <div>
+            <a href="#">notifications</a>
+            <a href="/users/<%- currentUser["$id"] %>">profile</a>
+        </div>
+    </header>
+
+    <main class="bg-red-400 w-full flex flex-auto">
+        MAIN
+    </main>
+
+
+    <nav class="bg-blue-200 h-16 w-full">
+        <a href="#">home</a>
+        <a href="#">search</a>
+        <a href="#">new post</a>
+        <a href="/feed">feed</a>
+        <a href="#">messages</a>
+    </nav>
+
 </body>
 </html>
