@@ -135,6 +135,36 @@ const appwriteService = {
         // editUser(userId, {profilePictureId:ppId})
     },
 
+    uploadFile: (bucketId, file) => {
+        // create unique id
+        const fileId = ID.unique()
+
+        // upload to storage
+        storage.createFile(
+            bucketId,
+            fileId,
+            InputFile.fromBuffer(file.buffer, file.originalname)
+        ).then(async (response) => {
+            console.log(response); // Success
+        }, function (error) {
+            console.log(error); // Failure
+        });
+
+
+        return {
+            fileId:fileId,
+            fileUrl:config.appwrite.endpoint + '/storage/buckets/' + bucketId + "/files/" + fileId + "/view?project=" + config.appwrite.projectId,
+            bucketId:bucketId,
+        }
+    },
+
+    getFileUrl: (bucketId, fileId) => {
+        // const fileUrl = config.appwrite.endpoint + '/storage/files/' + fileId + '/view?project=' + config.appwrite.projectId;
+        const fileUrl = config.appwrite.endpoint + '/storage/buckets/' + bucketId + "/files/" + fileId + "/view?project=" + config.appwrite.projectId;
+        // https://cloud.appwrite.io/v1/storage/buckets/6662b819001eb37c9631/files/6662b9390003b8cbb1e3/view?project=663554e7000097ac14d7&mode=admin
+        return fileUrl
+    },
+
     logoutUser: async () => {
         console.log("logout user function");
     },
@@ -155,14 +185,14 @@ const appwriteService = {
     //     })
     // },
 
-    getUser: async (userID) => {
+    getUser: async (userId) => {
         // console.log("helloooo "+userID);
 
         // get user data
         return await databases.getDocument(
             config.appwrite.databaseId, // databaseId
             config.appwrite.usersCollectionId, // collectionId
-            userID, // documentId
+            userId, // documentId
             [] // queries (optional)
         ).then((res) => {
             // console.log(res);

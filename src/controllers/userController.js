@@ -22,10 +22,10 @@ export const userProfileEdit = async (req, res) => {
         username: req.body.username, 
     }
 
+    // edit user
+    var ppData = appwriteService.uploadFile(config.appwrite.profilePhotosBucket, req.file)
+    editedUserData.profilePhotoUrl = ppData.fileUrl
     appwriteService.editUser(req.params.id, editedUserData)
-    var ppId = appwriteService.uploadProfilePhoto(req.cookies.currentUser["$id"], req.file)
-    console.log(ppId);
-
 
     res.redirect("/users/"+req.params.id)
 };
