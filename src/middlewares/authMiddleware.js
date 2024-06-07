@@ -1,10 +1,10 @@
 
-import {userGet} from "../controllers/userController.js"
 
 
 const authMiddleware = (req, res, next) => {
     if(req.cookies.currentUser){
-        console.log("user exist");
+        // console.log("user exist");
+        // console.log(req.cookies.currentUser);
     }else{
         res.redirect("/auth/login")
     }

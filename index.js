@@ -2,6 +2,7 @@
 import express from "express"
 import session from 'express-session';
 import cookieParser from 'cookie-parser';
+import cors from 'cors'
 import { join, dirname } from 'path'
 import config from './src/config.js'
 
@@ -25,6 +26,9 @@ import users from "./src/routes/users.js"
 import auth from "./src/routes/auth.js"
 import feed from "./src/routes/feed.js"
 
+// Import services
+import appwriteService from "./src/services/appwriteService.js";
+
 
 // Use middlewares
 app.use(express.urlencoded({extended:true}))
@@ -37,6 +41,7 @@ app.use(session({
     }
 }));
 app.use(cookieParser());
+app.use(cors())
 
 
 // Use routes
@@ -46,13 +51,13 @@ app.use("/feed", feed)
 
 
 // Render home
-app.get("/", (req, res) => {
+app.get("/", async (req, res) => {
     var currentUser = req.cookies.currentUser
     if(!currentUser){
         currentUser = {"$id": 0}
     }
     console.log(currentUser);
-    res.render("home", {currentUser: currentUser})
+    res.render("home", {currentUser: currentUser, users: await appwriteService.getUsers()})
 })
 
 

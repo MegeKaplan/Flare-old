@@ -1,6 +1,6 @@
 // appwriteService.js
 
-import { Client, Databases, ID, Permission, Role, Account, Query } from "node-appwrite";
+import { Client, Databases, Storage, ID, Permission, Role, Account, Query, InputFile } from "node-appwrite";
 import config from '../config.js';
 
 
@@ -16,6 +16,8 @@ client
 const databases = new Databases(client);
 
 const account = new Account(client);
+
+const storage = new Storage(client);
 
 const appwriteService = {
     // create user
@@ -37,8 +39,8 @@ const appwriteService = {
         if(auth){
             try {
                 const promise = databases.createDocument(
-                    '663a7a740033428b683c',
-                    '663a7a7e00154237915a',
+                    config.databaseId,
+                    config.usersCollectionId,
                     userId,
                     userdata)
                 return promise;
@@ -98,36 +100,63 @@ const appwriteService = {
             config.appwrite.databaseId, // databaseId
             config.appwrite.usersCollectionId, // collectionId
             userID, // documentId
-            {username: editedUserData.username},
+            editedUserData,
         ).then((res) => {
-            console.log(res);
+            // console.log(res);
         }, (err) => {
             console.log(err);
         })
+    },
+
+    uploadProfilePhoto: (userId, file) => {
+        // create unique id
+        const ppId = ID.unique()
+
+        // upload to storage
+        storage.createFile(
+            config.appwrite.profilePhotosBucket,
+            ppId,
+            InputFile.fromBuffer(file.buffer, file.originalname)
+        ).then(async (response) => {
+            console.log(response); // Success
+
+            // get preview
+            const result = await storage.getFileView(config.appwrite.profilePhotosBucket, ppId);
+            console.log(result);
+        }, function (error) {
+            console.log(error); // Failure
+        });
+
+
+        return ppId
+
+
+        // update user data
+        // editUser(userId, {profilePictureId:ppId})
     },
 
     logoutUser: async () => {
         console.log("logout user function");
     },
 
-    getCurrentUser: async () => {
-        console.log("-------------------------get current user");
-        let promise = await databases.listDocuments(
-            config.appwrite.databaseId,
-            config.appwrite.usersCollectionId,
-            [
-                Query.equal('username', '<USERNAME>')
-            ]
-        )
-        .then((res) => {
-            console.log(res);
-        }, (err) => {
-            console.log(err);
-        })
-    },
+    // getCurrentUser: async () => {
+    //     console.log("-------------------------get current user");
+    //     let promise = await databases.listDocuments(
+    //         config.appwrite.databaseId,
+    //         config.appwrite.usersCollectionId,
+    //         [
+    //             Query.equal('username', '<USERNAME>')
+    //         ]
+    //     )
+    //     .then((res) => {
+    //         console.log(res);
+    //     }, (err) => {
+    //         console.log(err);
+    //     })
+    // },
 
     getUser: async (userID) => {
-        console.log("helloooo "+userID);
+        // console.log("helloooo "+userID);
 
         // get user data
         return await databases.getDocument(
@@ -136,11 +165,24 @@ const appwriteService = {
             userID, // documentId
             [] // queries (optional)
         ).then((res) => {
-            console.log(res);
+            // console.log(res);
             return res
         }, (err) => {
             console.log(err);
         })
+    },
+
+    getUsers: async () => {
+        const users = await databases.listDocuments(
+            config.appwrite.databaseId, // databaseId
+            config.appwrite.usersCollectionId, // collectionId
+        )
+
+        console.log(users);
+
+        return users
+
+        // return ["abc", "def"]
     }
 };
 

@@ -2,22 +2,29 @@
 import appwriteService from "../services/appwriteService.js";
 import config from "../config.js";
 
+
+
 export const userList = (req, res) => {
     res.render("users", {title: "Users"});
 };
 
 export const userProfile = async (req, res) => {
     const userData = await appwriteService.getUser(req.params.id)
-    res.render("profile", userData)
+    res.render("profile", {userData: userData, currentUser: req.cookies.currentUser})
 };
 
 export const userProfileEdit = async (req, res) => {
     const userData = await appwriteService.getUser(req.params.id)
-    const editedUserData = {email: req.body.email, username: req.body.username, password: req.body.password, currentPassword: req.body.currentPassword}
-    console.log(editedUserData);
-
+    const editedUserData = {
+        // email: req.body.email,
+        // password: req.body.password, 
+        // currentPassword: req.body.currentPassword
+        username: req.body.username, 
+    }
 
     appwriteService.editUser(req.params.id, editedUserData)
+    var ppId = appwriteService.uploadProfilePhoto(req.cookies.currentUser["$id"], req.file)
+    console.log(ppId);
 
 
     res.redirect("/users/"+req.params.id)

@@ -10,6 +10,11 @@ import { userProfile, userProfileEdit } from "../controllers/userController.js"
 // Import middlewares
 import authMiddleware from "../middlewares/authMiddleware.js"
 
+// Set up multer
+import multer from "multer";
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
 
 
 router.get("/*", authMiddleware)
@@ -21,7 +26,8 @@ router.get("/:id/edit", async (req, res) => {
     res.render("profileEdit", userData)
 })
 
-router.post("/:id/edit", userProfileEdit)
+router.post("/:id/edit", upload.single('profilePicture'), userProfileEdit)
+
 
 
 export default router

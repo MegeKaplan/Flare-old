@@ -18,7 +18,11 @@
     </header>
 
     <main class="bg-red-400 w-full flex flex-auto">
-        MAIN
+        <h1>MAIN</h1>
+       
+        <% users.documents.forEach(user => { %>
+            <a href="/users/<%= user["$id"] %>"><%= user.username %></a>
+        <% }) %>
     </main>
 
 
