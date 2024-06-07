@@ -94,45 +94,17 @@ const appwriteService = {
         });
     },
 
-    editUser: async (userID, editedUserData) => {
-        // edit user document
+    updateDoc: async (colId, docId, updatedData) => {
         await databases.updateDocument(
             config.appwrite.databaseId, // databaseId
-            config.appwrite.usersCollectionId, // collectionId
-            userID, // documentId
-            editedUserData,
+            colId, // collectionId
+            docId, // documentId
+            updatedData,
         ).then((res) => {
-            // console.log(res);
+            console.log(res);
         }, (err) => {
             console.log(err);
         })
-    },
-
-    uploadProfilePhoto: (userId, file) => {
-        // create unique id
-        const ppId = ID.unique()
-
-        // upload to storage
-        storage.createFile(
-            config.appwrite.profilePhotosBucket,
-            ppId,
-            InputFile.fromBuffer(file.buffer, file.originalname)
-        ).then(async (response) => {
-            console.log(response); // Success
-
-            // get preview
-            const result = await storage.getFileView(config.appwrite.profilePhotosBucket, ppId);
-            console.log(result);
-        }, function (error) {
-            console.log(error); // Failure
-        });
-
-
-        return ppId
-
-
-        // update user data
-        // editUser(userId, {profilePictureId:ppId})
     },
 
     uploadFile: (bucketId, file) => {

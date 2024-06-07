@@ -20,6 +20,7 @@ export const userProfileEdit = async (req, res) => {
         // password: req.body.password, 
         // currentPassword: req.body.currentPassword
         username: req.body.username,
+        bio: req.body.bio,
     }
 
     // edit user
@@ -27,7 +28,8 @@ export const userProfileEdit = async (req, res) => {
         var ppData = appwriteService.uploadFile(config.appwrite.profilePhotosBucket, req.file)
         editedUserData.profilePhotoUrl = ppData.fileUrl
     }
-    appwriteService.editUser(req.params.id, editedUserData)
+    // appwriteService.editUser(req.params.id, editedUserData)
+    appwriteService.updateDoc(config.appwrite.usersCollectionId, req.cookies.currentUser["$id"], editedUserData)
 
     res.redirect("/users/"+req.params.id)
 };
@@ -35,7 +37,17 @@ export const userProfileEdit = async (req, res) => {
 export const userCreate = (req, res) => {
     const userData = {
         ...req.body,
-        profilePhotoUrl: "https://cloud.appwrite.io/v1/storage/buckets/6662b819001eb37c9631/files/6662be25001ec31e13d7/view?project=663554e7000097ac14d7" // default value
+        profilePhotoUrl: "https://cloud.appwrite.io/v1/storage/buckets/6662b819001eb37c9631/files/6662be25001ec31e13d7/view?project=663554e7000097ac14d7", // default value
+        bio:"",
+        isAdmin:false,
+        isDev:false,
+        isVerified:false,
+        followers:[],
+        following:[],
+        likes:[],
+        posts:[],
+        saves:[],
+        comments:[]
     }
     appwriteService.createUser(userData)
     res.redirect("/")
