@@ -19,19 +19,25 @@ export const userProfileEdit = async (req, res) => {
         // email: req.body.email,
         // password: req.body.password, 
         // currentPassword: req.body.currentPassword
-        username: req.body.username, 
+        username: req.body.username,
     }
 
     // edit user
-    var ppData = appwriteService.uploadFile(config.appwrite.profilePhotosBucket, req.file)
-    editedUserData.profilePhotoUrl = ppData.fileUrl
+    if(req.file){
+        var ppData = appwriteService.uploadFile(config.appwrite.profilePhotosBucket, req.file)
+        editedUserData.profilePhotoUrl = ppData.fileUrl
+    }
     appwriteService.editUser(req.params.id, editedUserData)
 
     res.redirect("/users/"+req.params.id)
 };
 
 export const userCreate = (req, res) => {
-    appwriteService.createUser(req.body)
+    const userData = {
+        ...req.body,
+        profilePhotoUrl: "https://cloud.appwrite.io/v1/storage/buckets/6662b819001eb37c9631/files/6662be25001ec31e13d7/view?project=663554e7000097ac14d7" // default value
+    }
+    appwriteService.createUser(userData)
     res.redirect("/")
 }
 

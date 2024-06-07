@@ -29,7 +29,7 @@ const appwriteService = {
         // const promise = await account.create(userId, userdata.email, userdata.password, userdata.username)
         const promise = await account.create(userId, userdata.email, userdata.password)
         .then(function (response) {
-            console.log(response);
+            // console.log(response);
             auth = true
         }, function (error) {
             console.log(error);
@@ -39,8 +39,8 @@ const appwriteService = {
         if(auth){
             try {
                 const promise = databases.createDocument(
-                    config.databaseId,
-                    config.usersCollectionId,
+                    config.appwrite.databaseId,
+                    config.appwrite.usersCollectionId,
                     userId,
                     userdata)
                 return promise;
@@ -83,7 +83,7 @@ const appwriteService = {
                 response.userId, // documentId
                 [] // queries (optional)
             ).then((res) => {
-                console.log(res);
+                // console.log(res);
                 return res
             }, (err) => {
                 console.log(err);
@@ -145,7 +145,7 @@ const appwriteService = {
             fileId,
             InputFile.fromBuffer(file.buffer, file.originalname)
         ).then(async (response) => {
-            console.log(response); // Success
+            // console.log(response); // Success
         }, function (error) {
             console.log(error); // Failure
         });
@@ -208,7 +208,7 @@ const appwriteService = {
             config.appwrite.usersCollectionId, // collectionId
         )
 
-        console.log(users);
+        // console.log(users);
 
         return users
 

@@ -2,14 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components{
-    /* html{
-        max-width: 600px;
-        max-height: 600px;
-        min-width: 100vw;
-        min-height: 100vh;
-    } */
+@layer base{
+    body{
+        width: 100vw;
+        height: 100vh;
+    }
+}
 
+@layer components{
     .btn{
         @apply bg-red-500
     }
