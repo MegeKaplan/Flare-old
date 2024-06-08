@@ -4,6 +4,7 @@ import config from "../config.js";
 
 export const postCreate = (req, res) => {
     console.log(req.body);
+    console.log(req.file);
     res.json(req.body)
 }
 
