@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= userData.username %>'s Profile</title>
+    <%- include('./layouts/links.ejs') %>
+</head>
+<body class="reset-body">
+    <h1><%= userData["$id"] %></h1>
+    <h1><%= userData.email %></h1>
+    <h1><%= userData.username %></h1>
+    <h1><%= userData.password %></h1>
+    <h1><%= userData.bio %></h1>
+    <% if (userData.email == currentUser.email) { %>
+        <a href="/users/<%= userData["$id"] %>/edit/">Edit Profile</a>
+    <% } else { %>
+        <h1>TEST</h1>
+    <% } %>
+    <img src="<%= userData.profilePhotoUrl %>" alt="">
+
+    <!-- include nav -->
+    <%- include('./layouts/nav.ejs') %>
+</body>
+</html>

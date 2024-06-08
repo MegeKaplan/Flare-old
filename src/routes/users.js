@@ -19,6 +19,10 @@ const upload = multer({ storage: storage });
 
 router.get("/*", authMiddleware)
 
+router.get("/", (req, res) => {
+    res.redirect("/")
+})
+
 router.get("/:id", userProfile)
 
 router.get("/:id/edit", async (req, res) => {

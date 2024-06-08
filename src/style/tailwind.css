@@ -16,8 +16,21 @@
 
     .logo{
         color: #ffb62e;
-        font-family: cursive;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         font-weight: 900;
         font-size: 2rem;
+        user-select: none;
+    }
+
+    .link-header{
+        @apply mx-0 w-16 h-full p-2 flex items-center justify-center
+    }
+
+    i{
+        @apply text-xl text-secondary-950 dark:text-secondary-50
+    }
+
+    .reset-body{
+        @apply dark:bg-secondary-900 dark:text-secondary-50 flex flex-col justify-center items-center h-full
     }
 }

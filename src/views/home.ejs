@@ -6,36 +6,42 @@
     <title>Flare - Home</title>
     <%- include('./layouts/links.ejs') %>
 </head>
-<body class="bg-slate-500 flex flex-col justify-center items-center h-full">
-    <!-- <%- include('./layouts/nav.ejs') %> -->
-
-    <header class="bg-blue-200 h-16 w-full flex flex-row justify-between items-center px-4">
+<body class="reset-body">
+    <!-- <header class="bg-blue-200 h-16 w-full flex flex-row justify-between items-center px-4">
         <a href="/" class="logo">Flare</a>
         <div>
             <a href="#">notifications</a>
             <a href="/users/<%- currentUser["$id"] %>">profile</a>
         </div>
+    </header> -->
+
+    <header class="flex items-center justify-between w-full h-16 px-4 bg-secondary-50 dark:bg-secondary-950 text-secondary-50">
+        <div class="logo">Flare</div>
+        <div class="flex items-center justify-center w-auto h-full">
+            <a href="#" class="link-header"><i class="fa-solid fa-bell"></i></a>
+            <a href="/users/<%= currentUser["$id"] %>" class="link-header">
+                <img src="<%= currentUser.profilePhotoUrl %>" class="w-full h-full rounded-full">
+            </a>
+        </div>
     </header>
 
-    <main class="bg-red-400 w-full flex flex-auto">
+
+
+    <main class="dark:bg-secondary-900 bg-secondary-100 w-full flex flex-auto">
         <h1>MAIN</h1>
        
         <% users.documents.forEach(user => { %>
-            <a href="/users/<%= user["$id"] %>">
+            <a href="/users/<%= user["$id"] %>" class="w-50">
                 <h3><%= user.username %></h3>
-                <img src="<%= user.profilePhotoUrl %>" alt="">
+                <img src="<%= user.profilePhotoUrl %>" class="w-10 h-10">
             </a>
         <% }) %>
     </main>
 
 
-    <nav class="bg-blue-200 h-16 w-full">
-        <a href="#">home</a>
-        <a href="#">search</a>
-        <a href="#">new post</a>
-        <a href="/feed">feed</a>
-        <a href="#">messages</a>
-    </nav>
+    <!-- include nav -->
+    <%- include('./layouts/nav.ejs') %>
+    
 
 </body>
 </html>

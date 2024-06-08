@@ -52,11 +52,10 @@ app.use("/feed", feed)
 
 // Render home
 app.get("/", async (req, res) => {
-    var currentUser = req.cookies.currentUser
+    var currentUser = await appwriteService.getUser(req.cookies.currentUser.$id)
     if(!currentUser){
         currentUser = {"$id": 0}
     }
-    console.log(currentUser);
     res.render("home", {currentUser: currentUser, users: await appwriteService.getUsers()})
 })
 

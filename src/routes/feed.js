@@ -6,7 +6,7 @@ import authMiddleware from "../middlewares/authMiddleware.js"
 
 
 router.get("/", authMiddleware, (req, res) => {
-    res.send(req.cookies.currentUser)
+    res.json(req.cookies.currentUser)
 })
 
 // router.get("/", userGet)
