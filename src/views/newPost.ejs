@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flare - Create New Post</title>
+    <%- include('./layouts/links.ejs') %>
+</head>
+<body class="reset-body">
+    <main class="w-full h-full">
+        <form action="/posts/create/" method="post" enctype="multipart/form-data" class="w-full">
+            <section class="grid grid-cols-5 w-full">
+                <div class="col-span-2 flex items-center justify-center p-3">
+                    <img src="https://snappix.netlify.app/app/imgs/add_photo.png" class="w-28 h-28 ">
+                </div>
+                <div class="col-span-3 flex items-center justify-center w-full h-full">
+                    <input type="file" name="postImage">
+                </div>
+            </section>
+
+            
+            <h3 class="m-4 mb-5 text-lg font-medium text-gray-900 dark:text-white mt-3">Select Post Type:</h3>
+            <ul class="w-full flex flex-row items-center justify-around">
+                <li class="w-1/4">
+                    <input type="radio" id="image" name="postType" value="image" class="hidden peer" required />
+                    <label for="image" class="flex items-center justify-center px-3 py-2 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+                        <div class="block">
+                            <div class="">Photo</div>
+                        </div>
+                    </label>
+                </li>
+                <li class="w-1/4">
+                    <input type="radio" id="story" name="postType" value="story" class="hidden peer" required />
+                    <label for="story" class="flex items-center justify-center px-3 py-2 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+                        <div class="block">
+                            <div class="">Story</div>
+                        </div>
+                    </label>
+                </li>
+                <li class="w-1/4">
+                    <input type="radio" id="text" name="postType" value="text" class="hidden peer" required />
+                    <label for="text" class="flex items-center justify-center px-3 py-2 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+                        <div class="block">
+                            <div class="">Text</div>
+                        </div>
+                    </label>
+                </li>
+            </ul>
+
+  
+            <section class="m-4">
+                <label for="title" class="block mb-2 text-sm font-medium text-secondary-950 dark:text-secondary-50">Post title</label>
+                <input id="title" type="text" placeholder="Disabled..." name="title" class="bg-secondary-50 border border-secondary-100 text-gray-900 outline-none sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-secondary-50 dark:focus:ring-blue-500 dark:focus:border-blue-500" disabled>
+            </section>
+
+            <section class="m-4">
+                <label for="desc" class="block mb-2 text-sm font-medium text-secondary-950 dark:text-secondary-50">Post description or content</label>
+                <input id="desc" type="text" placeholder="Hello world!" name="desc" class="bg-secondary-50 border border-secondary-100 text-gray-900 outline-none sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-secondary-50 dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+            </section>
+
+            <section class="m-4">
+                <label for="tags" class="block mb-2 text-sm font-medium text-secondary-950 dark:text-secondary-50">Post Tags (optional)</label>
+                <input id="tags" type="text" placeholder="Car, cat, house etc." name="tags" class="bg-secondary-50 border border-secondary-100 text-gray-900 outline-none sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-secondary-50 dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            </section>
+
+            <section class="m-4">
+                <button class="button dark:bg-secondary-950 w-full mt-4">Share This Post</button>
+            </section>
+        </form>
+        
+    </main>
+
+
+    <%- include('./layouts/nav.ejs') %>
+</body>
+</html>

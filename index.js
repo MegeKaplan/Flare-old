@@ -25,6 +25,7 @@ import authMiddleware from "./src/middlewares/authMiddleware.js";
 import users from "./src/routes/users.js"
 import auth from "./src/routes/auth.js"
 import feed from "./src/routes/feed.js"
+import posts from "./src/routes/posts.js"
 
 // Import services
 import appwriteService from "./src/services/appwriteService.js";
@@ -48,6 +49,7 @@ app.use(cors())
 app.use("/users", users)
 app.use("/auth", auth)
 app.use("/feed", feed)
+app.use("/posts", posts)
 
 
 // Render home

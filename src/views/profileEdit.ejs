@@ -7,22 +7,8 @@
     <%- include('./layouts/links.ejs') %>
 </head>
 <body class="reset-body">
-    <!-- <h1><%- userData.$id %></h1>
-    <h1><%- userData.email %></h1>
-    <h1><%- userData.username %></h1>
-    <h1><%- userData.password %></h1>
-    <form action="/users/<%- userData.$id %>/edit/" method="post" enctype="multipart/form-data">
-        <input type="file" name="profilePicture">
-        <input disabled type="email" placeholder="email" name="email" value="<%- userData.email %>">
-        <input type="text" placeholder="username" name="username" value="<%- userData.username %>">
-        <input disabled type="password" placeholder="current password" name="currentPassword" value="<%- userData.password %>">
-        <input disabled type="password" placeholder="password" name="password" value="<%- userData.password %>">
-        <input type="text" placeholder="bio" name="bio" value="<%- userData.bio %>">
-        <button>Save</button>
-    </form> -->
-
     <main class="w-full h-full">
-        <form action="/users/<%- userData.$id %>/edit/" method="post" enctype="multipart/form-data" class="w-full">
+        <form action="/users/<%= userData.$id %>/edit/" method="post" enctype="multipart/form-data" class="w-full">
             <section class="grid grid-cols-3 w-full">
                 <div class="col-span-1 flex items-center justify-center p-3">
                     <img src="<%= userData.profilePhotoUrl %>" class="w-28 h-28 rounded-full">
@@ -45,10 +31,10 @@
             </section>
             <section class="m-4">
                 <label for="password" class="block mb-2 text-sm font-medium text-secondary-950 dark:text-secondary-50">Your password</label>
-                <input value="<%= userData.password %>" id="password" type="password" placeholder="...." name="password" class="bg-secondary-50 border border-secondary-100 text-gray-900 outline-none sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-secondary-50 dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:text-gray-500" required disabled>
+                <input value="<%= userData.password %>" id="password" type="password" placeholder="••••••••" name="password" class="bg-secondary-50 border border-secondary-100 text-gray-900 outline-none sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-secondary-50 dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:text-gray-500" required disabled>
             </section>
             <section class="m-4">
-                <button class="button bg-secondary-950">Save Changes</button>
+                <button class="button dark:bg-secondary-950 w-full mt-4">Save Changes</button>
             </section>
         </form>
         
