@@ -35,7 +35,7 @@
     }
 
     .button{
-        @apply dark:bg-secondary-900 dark:text-secondary-50 p-3 px-4 rounded-md hover:dark:bg-secondary-800 transition
+        @apply dark:bg-secondary-900 dark:text-secondary-50 p-3 bg-secondary-100 hover:bg-secondary-200 text-secondary-950 px-4 rounded-md hover:dark:bg-secondary-800 transition
         /* @apply dark:bg-primary-400 dark:text-primary-50 p-2 */
     }
 }

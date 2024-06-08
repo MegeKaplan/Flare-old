@@ -3,22 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%- username %>'s Profile</title>
+    <title><%- userData.username %>'s Profile</title>
+    <%- include('./layouts/links.ejs') %>
 </head>
-<body>
-    <h1><%- $id %></h1>
-    <h1><%- email %></h1>
-    <h1><%- username %></h1>
-    <h1><%- password %></h1>
-    <form action="/users/<%- $id %>/edit/" method="post" enctype="multipart/form-data">
-    <!-- <form action="/users/<%- $id %>/edit/" method="post"> -->
+<body class="reset-body">
+    <!-- <h1><%- userData.$id %></h1>
+    <h1><%- userData.email %></h1>
+    <h1><%- userData.username %></h1>
+    <h1><%- userData.password %></h1>
+    <form action="/users/<%- userData.$id %>/edit/" method="post" enctype="multipart/form-data">
         <input type="file" name="profilePicture">
-        <input disabled type="email" placeholder="email" name="email" value="<%- email %>">
-        <input type="text" placeholder="username" name="username" value="<%- username %>">
-        <input disabled type="password" placeholder="current password" name="currentPassword" value="<%- password %>">
-        <input disabled type="password" placeholder="password" name="password" value="<%- password %>">
-        <input type="text" placeholder="bio" name="bio" value="<%- bio %>">
+        <input disabled type="email" placeholder="email" name="email" value="<%- userData.email %>">
+        <input type="text" placeholder="username" name="username" value="<%- userData.username %>">
+        <input disabled type="password" placeholder="current password" name="currentPassword" value="<%- userData.password %>">
+        <input disabled type="password" placeholder="password" name="password" value="<%- userData.password %>">
+        <input type="text" placeholder="bio" name="bio" value="<%- userData.bio %>">
         <button>Save</button>
-    </form>
+    </form> -->
+
+    <main class="w-full h-full">
+        <form action="/users/<%- userData.$id %>/edit/" method="post" enctype="multipart/form-data" class="w-full">
+            <section class="grid grid-cols-3 w-full">
+                <div class="col-span-1 flex items-center justify-center p-3">
+                    <img src="<%= userData.profilePhotoUrl %>" class="w-28 h-28 rounded-full">
+                </div>
+                <div class="col-span-2 flex items-center justify-center w-full h-full">
+                    <input type="file" name="profilePicture">
+                </div>
+            </section>
+            <section class="m-4">
+                <label for="username" class="block mb-2 text-sm font-medium text-secondary-950 dark:text-secondary-50">Your username</label>
+                <input value="<%= userData.username %>" id="username" type="text" placeholder="John Doe" name="username" class="bg-secondary-50 border border-secondary-100 text-gray-900 outline-none sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-secondary-50 dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+            </section>
+            <section class="m-4">
+                <label for="bio" class="block mb-2 text-sm font-medium text-secondary-950 dark:text-secondary-50">Your bio</label>
+                <input value="<%= userData.bio %>" id="bio" type="text" placeholder="Hello world!" name="bio" class="bg-secondary-50 border border-secondary-100 text-gray-900 outline-none sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-secondary-50 dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            </section>
+            <section class="m-4">
+                <label for="email" class="block mb-2 text-sm font-medium text-secondary-950 dark:text-secondary-50">Your email</label>
+                <input value="<%= userData.email %>" id="email" type="email" placeholder="johndoe@flare.com" name="email" class="bg-secondary-50 border border-secondary-100 text-gray-900 outline-none sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-secondary-50 dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:text-gray-500" required disabled>
+            </section>
+            <section class="m-4">
+                <label for="password" class="block mb-2 text-sm font-medium text-secondary-950 dark:text-secondary-50">Your password</label>
+                <input value="<%= userData.password %>" id="password" type="password" placeholder="...." name="password" class="bg-secondary-50 border border-secondary-100 text-gray-900 outline-none sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-secondary-50 dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:text-gray-500" required disabled>
+            </section>
+            <section class="m-4">
+                <button class="button bg-secondary-950">Save Changes</button>
+            </section>
+        </form>
+        
+    </main>
+
+
+    <%- include('./layouts/nav.ejs') %>
 </body>
 </html>
