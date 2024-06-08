@@ -9,9 +9,6 @@
 <body class="reset-body">
     <main class="w-full h-full">
         <form action="/posts/create/" method="post" enctype="multipart/form-data" class="w-full">
-            
-
-            
             <h3 class="m-4 mb-5 text-lg font-medium text-gray-900 dark:text-white mt-3">Select Post Type:</h3>
             <ul class="w-full flex flex-row items-center justify-around">
                 <li class="w-1/4">
@@ -39,8 +36,6 @@
                     </label>
                 </li>
             </ul>
-
-  
             <section class="m-4">
                 <label for="title" class="block mb-2 text-sm font-medium text-secondary-950 dark:text-secondary-50">Post title</label>
                 <input id="title" type="text" placeholder="Title" name="title" class="bg-secondary-50 border border-secondary-100 text-gray-900 outline-none sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-secondary-50 dark:focus:ring-blue-500 dark:focus:border-blue-500" disabled>
@@ -52,7 +47,7 @@
             </section>
 
             <section class="m-4">
-                <label for="tags" class="block mb-2 text-sm font-medium text-secondary-950 dark:text-secondary-50">Post Tags (optional)</label>
+                <label for="tags" class="block mb-2 text-sm font-medium text-secondary-950 dark:text-secondary-50">Post Tags (Separate by comma)</label>
                 <input id="tags" type="text" placeholder="Tags" name="tags" class="bg-secondary-50 border border-secondary-100 text-gray-900 outline-none sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-secondary-50 dark:focus:ring-blue-500 dark:focus:border-blue-500" disabled>
             </section>
 
@@ -64,88 +59,15 @@
                     <input type="file" name="postImage">
                 </div>
             </section>
-
             <section class="mx-4">
                 <button class="button dark:bg-secondary-950 w-full mt-4">Share This Post</button>
             </section>
         </form>
-
     </main>
 
-    <script>
-        // Change input status above post type
-        // select radio inputs
-        const imageRadio = document.querySelector("#image")
-        const storyRadio = document.querySelector("#story")
-        const textRadio = document.querySelector("#text")
-        const fileInputSection = document.querySelector("#fileInputSection")
 
-        // select inputs
-        const titleInput = document.querySelector("#title")
-        const contentInput = document.querySelector("#content")
-        const tagsInput = document.querySelector("#tags")
-
-        // set placeholders
-        const titleInputPlaceholder = "Weekend Party"
-        const contentInputPlaceholder = "We are so happy!"
-        const tagsInputPlaceholder = "Car, cat, house etc."
-        const disabledInputPlaceholder = "Disabled..."
-
-        titleInput.placeholder = titleInputPlaceholder
-        contentInput.placeholder = contentInputPlaceholder
-        tagsInput.placeholder = tagsInputPlaceholder
-
-        // change input statuses
-        imageRadio.onclick = (e) => {
-            titleInput.disabled = false
-            titleInput.value = ""
-            titleInput.placeholder = titleInputPlaceholder
-
-            contentInput.disabled = false
-            contentInput.value = ""
-            contentInput.placeholder = contentInputPlaceholder
-
-            tagsInput.disabled = false
-            tagsInput.value = ""
-            tagsInput.placeholder = tagsInputPlaceholder
-
-            fileInputSection.classList.remove("hidden")
-        }
-        storyRadio.onclick = (e) => {
-            titleInput.disabled = true
-            titleInput.value = ""
-            titleInput.placeholder = disabledInputPlaceholder
-
-            contentInput.disabled = true
-            contentInput.value = ""
-            contentInput.placeholder = disabledInputPlaceholder
-
-            tagsInput.disabled = true
-            tagsInput.value = ""
-            tagsInput.placeholder = disabledInputPlaceholder
-
-            fileInputSection.classList.remove("hidden")
-        }
-        textRadio.onclick = (e) => {
-            titleInput.disabled = false
-            titleInput.value = ""
-            titleInput.placeholder = titleInputPlaceholder
-
-            contentInput.disabled = false
-            contentInput.value = ""
-            contentInput.placeholder = contentInputPlaceholder
-
-            tagsInput.disabled = false
-            tagsInput.value = ""
-            tagsInput.placeholder = tagsInputPlaceholder
-
-            fileInputSection.classList.add("hidden")
-        }
-
-
-
-    </script>
-
+    <script src="../js/changeInputStatue.js"></script>
+    
 
     <%- include('./layouts/nav.ejs') %>
 </body>

@@ -45,9 +45,9 @@ export const userCreate = (req, res) => {
         followers:[],
         following:[],
         likes:[],
-        posts:[],
         saves:[],
-        comments:[]
+        comments:[],
+        posts:[],
     }
     appwriteService.createUser(userData)
     res.redirect("/")

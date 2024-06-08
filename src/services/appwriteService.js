@@ -94,6 +94,19 @@ const appwriteService = {
         });
     },
 
+    createPost: async (postData) => {
+        try {
+            const promise = databases.createDocument(
+                config.appwrite.databaseId,
+                config.appwrite.postsCollectionId,
+                ID.unique(),
+                postData)
+            return promise;
+        } catch (error) {
+            throw new Error(`An error occurred: ${error.message}`);
+        }
+    },
+
     updateDoc: async (colId, docId, updatedData) => {
         await databases.updateDocument(
             config.appwrite.databaseId, // databaseId

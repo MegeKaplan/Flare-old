@@ -55,6 +55,7 @@ app.use("/posts", posts)
 // Render home
 app.get("/", async (req, res) => {
     var currentUser = await appwriteService.getUser(req.cookies.currentUser.$id)
+    console.log(currentUser);
     if(!currentUser){
         currentUser = {"$id": 0}
     }
