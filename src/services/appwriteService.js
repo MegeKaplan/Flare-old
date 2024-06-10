@@ -198,6 +198,16 @@ const appwriteService = {
         return users
 
         // return ["abc", "def"]
+    },
+
+    getPosts: async (seenStatus=false) => {
+        const posts = await databases.listDocuments(
+            config.appwrite.databaseId, // databaseId
+            config.appwrite.postsCollectionId, // collectionId
+        )
+
+
+        return posts
     }
 };
 

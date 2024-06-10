@@ -59,7 +59,11 @@ app.get("/", async (req, res) => {
     if(!currentUser){
         currentUser = {"$id": 0}
     }
-    res.render("home", {currentUser: currentUser, users: await appwriteService.getUsers()})
+    res.render("home", {
+        currentUser: currentUser,
+        users: await appwriteService.getUsers(),
+        posts: await appwriteService.getPosts(),
+    })
 })
 
 
