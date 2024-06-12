@@ -44,9 +44,9 @@
                         <div class="overflow-hidden rounded-full size-10">
                             <img src="<%= post.sender.profilePhotoUrl %>" class="size-full">
                         </div>
-                        <h2 class="ml-3 text-lg">
+                        <a href="/users/<%= post.sender.$id %>" class="ml-3 text-lg">
                             <%= post.sender.username %>
-                        </h2>
+                        </a>
                     </div>
                     <div class="w-auto h-full flex items-center justify-between">
                         <i class="fa-solid fa-bars"></i>
@@ -62,22 +62,22 @@
                 <div class="row-span-3 bg-secondary-950 grid grid-rows-6">
                     <div class="row-span-2 w-full flex items-center px-2">
                         <div class="w-auto h-full flex items-center justify-center mx-4">
-                            <i class="fa-solid fa-heart text-2xl cursor-pointer"></i>
+                            <i class="likeBtn fa-solid fa-heart text-2xl cursor-pointer <%= currentUser.likes.includes(post.$id) ? 'text-red-400' : '' %>" data-id="<%= post.$id %>"></i>
                             <h2 class="text-xl ml-3">0</h2>
                         </div>
                         <div class="w-auto h-full flex items-center justify-center mx-4">
-                            <i class="fa-solid fa-comment text-2xl cursor-pointer"></i>
+                            <i class="commentBtn fa-solid fa-comment text-2xl cursor-pointer <%= currentUser.comments.includes(post.$id) ? 'text-red-400' : '' %>" data-id="<%= post.$id %>"></i>
                             <h2 class="text-xl ml-3">0</h2>
                         </div>
                         <div class="w-auto h-full flex items-center justify-center mx-4">
-                            <i class="fa-solid fa-bookmark text-2xl cursor-pointer"></i>
+                            <i class="saveBtn fa-solid fa-bookmark text-2xl cursor-pointer <%= currentUser.saves.includes(post.$id) ? 'text-red-400' : '' %>" data-id="<%= post.$id %>"></i>
                             <h2 class="text-xl ml-3">0</h2>
                         </div>
                     </div>
                     <div class="row-span-4 w-full flex justify-between flex-col px-4 pb-2">
                         <h1><%= post.title %></h1>
                         <p><%= post.content %></p>
-                        <p><%= post.$createdAt %></p>
+                        <p class="text-gray-400"><%= formatRelativeTime(post.$createdAt) %></p>
                     </div>
                 </div>
             </div>
@@ -85,6 +85,7 @@
 
     </main>
 
+    <script src="/js/postInteractions.js"></script>
 
     <!-- include nav -->
     <%- include('./layouts/nav.ejs') %>

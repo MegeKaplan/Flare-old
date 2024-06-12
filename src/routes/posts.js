@@ -5,7 +5,7 @@ const router = express.Router()
 import appwriteService from "../services/appwriteService.js"
 
 // Import controllers
-import { postCreate } from "../controllers/postController.js"
+import { likePost, postCreate } from "../controllers/postController.js"
 
 // Import middlewares
 import authMiddleware from "../middlewares/authMiddleware.js"
@@ -28,6 +28,9 @@ router.get("/create", (req, res) => {
 
 
 router.post("/create", upload.single('postImage'), postCreate)
+
+router.post("/:id/like", likePost)
+
 
 
 

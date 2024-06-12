@@ -208,7 +208,24 @@ const appwriteService = {
 
 
         return posts
-    }
+    },
+
+    getPost: async (postId) => {
+        // console.log("helloooo "+userID);
+
+        // get user data
+        return await databases.getDocument(
+            config.appwrite.databaseId, // databaseId
+            config.appwrite.postsCollectionId, // collectionId
+            postId, // documentId
+            [] // queries (optional)
+        ).then((res) => {
+            // console.log(res);
+            return res
+        }, (err) => {
+            console.log(err);
+        })
+    },
 };
 
 export default appwriteService;

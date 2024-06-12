@@ -61,8 +61,14 @@ export const userLogin = async (req, res) => {
 
 export const userGet = async (req, res) => {
     const userData = await appwriteService.getUser(req.params.id)
+    res.send(userData)
+}
+
+export const userCurrent = async (req, res) => {
+    const userData = await appwriteService.getUser(req.cookies.currentUser.$id)
     res.json(userData)
 }
+
 
 
 

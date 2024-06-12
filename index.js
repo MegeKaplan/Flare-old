@@ -30,9 +30,12 @@ import posts from "./src/routes/posts.js"
 // Import services
 import appwriteService from "./src/services/appwriteService.js";
 
+// Import helpers
+import { formatRelativeTime } from "./src/helpers/dateHelper.js";
 
 // Use middlewares
 app.use(express.urlencoded({extended:true}))
+app.use(express.json())
 app.use(session({
     secret: config.session.secret,
     resave: false,
@@ -55,7 +58,6 @@ app.use("/posts", posts)
 // Render home
 app.get("/", async (req, res) => {
     var currentUser = await appwriteService.getUser(req.cookies.currentUser.$id)
-    console.log(currentUser);
     if(!currentUser){
         currentUser = {"$id": 0}
     }
@@ -63,6 +65,7 @@ app.get("/", async (req, res) => {
         currentUser: currentUser,
         users: await appwriteService.getUsers(),
         posts: await appwriteService.getPosts(),
+        formatRelativeTime: await formatRelativeTime
     })
 })
 
