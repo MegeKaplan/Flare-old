@@ -1,7 +1,9 @@
 <nav class="flex items-center justify-around w-full h-16 px-4 bg-secondary-50 dark:bg-secondary-950 text-secondary-50 fixed bottom-0 row-span-1">
-    <a href="/" class="hover:pb-5 transition-all"><i class="fa-solid fa-house"></i></a>
-    <a href="#" class="hover:pb-5 transition-all"><i class="fa-solid fa-magnifying-glass"></i></a>
-    <a href="/posts/create" class="hover:pb-5 transition-all"><i class="fa-solid fa-plus"></i></a>
-    <a href="/feed" class="hover:pb-5 transition-all"><i class="fa-solid fa-compass"></i></a>
-    <a href="#" class="hover:pb-5 transition-all"><i class="fa-solid fa-paper-plane"></i></a>
+    <a href="/"><i class="fa-solid fa-house"></i></a>
+    <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+    <a href="/posts/create"><i class="fa-solid fa-plus"></i></a>
+    <a href="#"><i class="fa-solid fa-paper-plane"></i></a>
+    <a href="/users/<%= currentUser.$id %>" class="mx-[-0.5rem]">
+        <img src="<%= currentUser.profilePhotoUrl %>" class="w-10 h-10 rounded-full">
+    </a>
 </nav>

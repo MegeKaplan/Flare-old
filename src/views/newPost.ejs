@@ -69,6 +69,8 @@
     <script src="../js/changeInputStatue.js"></script>
     
 
-    <%- include('./layouts/nav.ejs') %>
+    <!-- include nav -->
+    <%- include('./layouts/nav.ejs'), {currentUser: currentUser} %>
+
 </body>
 </html>

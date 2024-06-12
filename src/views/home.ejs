@@ -7,21 +7,15 @@
     <%- include('./layouts/links.ejs') %>
 </head>
 <body class="reset-body">
-    <!-- <header class="bg-blue-200 h-16 w-full flex flex-row justify-between items-center px-4">
-        <a href="/" class="logo">Flare</a>
-        <div>
-            <a href="#">notifications</a>
-            <a href="/users/<%- currentUser["$id"] %>">profile</a>
-        </div>
-    </header> -->
 
     <header class="sticky left-0 top-0 flex items-center justify-between w-full h-16 px-4 bg-secondary-50 dark:bg-secondary-950 text-secondary-50">
         <div class="logo">Flare</div>
         <div class="flex items-center justify-center w-auto h-full">
             <a href="#" class="link-header"><i class="fa-solid fa-bell"></i></a>
-            <a href="/users/<%= currentUser["$id"] %>" class="link-header">
+            <a href="#" class="link-header"><i class="fa-solid fa-gear"></i></a>
+            <!-- <a href="/users/<%= currentUser.$id %>" class="link-header">
                 <img src="<%= currentUser.profilePhotoUrl %>" class="w-10 h-10 rounded-full p-2">
-            </a>
+            </a> -->
         </div>
     </header>
 
@@ -86,7 +80,7 @@
     </main>
 
     <!-- include nav -->
-    <%- include('./layouts/nav.ejs') %>
+    <%- include('./layouts/nav.ejs'), {currentUser: currentUser} %>
     
     <script src="/js/postInteractions.js"></script>
 

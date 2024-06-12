@@ -30,7 +30,7 @@ router.get("/:id", userProfile)
 
 router.get("/:id/edit", async (req, res) => {
     const userData = await appwriteService.getUser(req.params.id)
-    res.render("profileEdit", {userData: userData})
+    res.render("profileEdit", {userData: userData, currentUser: req.cookies.currentUser})
 })
 
 router.post("/:id/edit", upload.single('profilePicture'), userProfileEdit)
