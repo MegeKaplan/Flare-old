@@ -5,7 +5,7 @@ const router = express.Router()
 import appwriteService from "../services/appwriteService.js"
 
 // Import controllers
-import { userCurrent, userProfile, userProfileEdit } from "../controllers/userController.js"
+import { followUser, userCurrent, userProfile, userProfileEdit } from "../controllers/userController.js"
 
 // Import middlewares
 import authMiddleware from "../middlewares/authMiddleware.js"
@@ -25,8 +25,8 @@ router.get("/", (req, res) => {
 
 router.get("/current", userCurrent)
 
-router.get("/:id", userProfile)
 
+router.get("/:id", userProfile)
 
 router.get("/:id/edit", async (req, res) => {
     const userData = await appwriteService.getUser(req.params.id)
@@ -35,6 +35,7 @@ router.get("/:id/edit", async (req, res) => {
 
 router.post("/:id/edit", upload.single('profilePicture'), userProfileEdit)
 
+router.get("/:id/follow", followUser)
 
 
 

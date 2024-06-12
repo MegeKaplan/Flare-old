@@ -69,7 +69,35 @@ export const userCurrent = async (req, res) => {
     res.json(userData)
 }
 
+export const followUser = async (req, res) => {
+    const userData = await appwriteService.getUser(req.params.id)
+    const currentUser = await appwriteService.getUser(req.cookies.currentUser.$id)
 
+
+    const isCurrentUserFollowingIncludesUserId = currentUser.following.includes(userData.$id);
+    const isUserFollowersIncludesCurrentUserId = userData.followers.includes(currentUser.$id);
+    const isCurrentUserFollowing = isCurrentUserFollowingIncludesUserId & isUserFollowersIncludesCurrentUserId
+
+    
+    if(!isCurrentUserFollowing){
+        appwriteService.updateDoc(config.appwrite.usersCollectionId, currentUser.$id, {following: [...currentUser.following, userData.$id]})
+        appwriteService.updateDoc(config.appwrite.usersCollectionId, userData.$id, {followers: [...userData.followers, currentUser.$id]})
+        
+        setTimeout(() => {
+            res.redirect("/users/"+req.params.id)
+        }, 500);
+    } else{
+        const newCurrentUserFollowing = currentUser.following.filter(id => id.toString() != userData.$id.toString());
+        const newUserFollowers = userData.followers.filter(id => id.toString() != currentUser.$id.toString());
+
+        appwriteService.updateDoc(config.appwrite.usersCollectionId, currentUser.$id, {following: newCurrentUserFollowing})
+        appwriteService.updateDoc(config.appwrite.usersCollectionId, userData.$id, {followers: newUserFollowers})
+
+        setTimeout(() => {
+            res.redirect("/users/"+req.params.id)
+        }, 500);
+    }
+}
 
 
 

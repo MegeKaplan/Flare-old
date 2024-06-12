@@ -1,7 +1,7 @@
 
 document.addEventListener('DOMContentLoaded', async () => {
-    
     const likeButtons = document.querySelectorAll('.likeBtn');
+    const likeCountEls = document.querySelectorAll('.likeCount');
     likeButtons.forEach(button => {
         button.addEventListener('click', async (e) => {
             const postId = e.target.getAttribute('data-id');
@@ -45,10 +45,20 @@ document.addEventListener('DOMContentLoaded', async () => {
                     );
                     
 
-                    if(!isUserLiked){
+                    if(!isPostLikesIncludesUserId){
                         e.target.classList.add("text-red-400")
+                        likeCountEls.forEach(el => {
+                            if(el.getAttribute('data-id') == postId){
+                                el.innerText = Number(el.innerText) + 1
+                            }
+                        })
                     }else{
                         e.target.classList.remove("text-red-400")
+                        likeCountEls.forEach(el => {
+                            if(el.getAttribute('data-id') == postId){
+                                el.innerText = Number(el.innerText) - 1
+                            }
+                        })
                     }
                 }
             } else {

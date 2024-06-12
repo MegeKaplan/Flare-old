@@ -8,28 +8,6 @@
 </head>
 <body class="reset-body">
     <main class="w-full h-full">
-        <!-- <div class="grid grid-cols-4 w-full h-20">
-            <section class="w-full h-full col-span-1">
-                <img src="<%= userData.profilePhotoUrl %>">
-            </section>
-            <section class="col-span-3">
-                <div>
-                    <h1><%= userData.username %></h1>
-                    <% if (userData.email == currentUser.email) { %>
-                        <a href="/users/<%= userData["$id"] %>/edit/" class="button">Edit Profile</a>
-                    <% } else { %>
-                        <a href="/users/<%= userData["$id"] %>/follow" class="button">Follow</a>
-                    <% } %>
-                </div>
-                <div>
-                    <div>CoP</div>
-                    <div>CoF</div>
-                    <div>CoF</div>
-                </div>
-                <div>
-                    <%= userData.bio %>
-                </div>
-            </section> -->
         <div class="w-full h-60 pt-4 dark:bg-secondary-950 bg-secondary-50">
             <section class="grid grid-cols-6 w-full gap-0">
                 <div class="col-span-2 w-full h-full flex items-center justify-center">
@@ -39,9 +17,16 @@
                     <div class="w-full flex items-center justify-center pr-2">
                         <h1 class="text-2xl mr-4"><%= userData.username %></h1>
                         <% if (userData.email == currentUser.email) { %>
-                            <a href="/users/<%= userData["$id"] %>/edit/" class="button">Edit</a>
+                            <a href="/users/<%= userData.$id %>/edit/" class="button">Edit</a>
                         <% } else { %>
-                            <a href="/users/<%= userData["$id"] %>/follow" class="button">Follow</a>
+                            <!-- <a href="/users/<%= userData.$id %>/follow" class="button"><%= !currentUser.following.includes(userData.$id) ? "Follow" : "Unfollow" %></a> -->
+                            <a href="/users/<%= userData.$id %>/follow" class="button">
+                                <% if (!userData.followers.includes(currentUser.$id)) { %>
+                                    Follow
+                                <% } else { %>
+                                    Unfollow
+                                <% } %>
+                            </a>
                         <% } %>
                     </div>
                     <div class="w-full flex justify-around items-center p-4 flex-row">
@@ -67,6 +52,7 @@
 
 
     </main>
+    
     <!-- include nav -->
     <%- include('./layouts/nav.ejs') %>
 </body>
