@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors'
 import { join, dirname } from 'path'
 import config from './src/config.js'
+import "dotenv/config"
 
 // Set express app
 const app = express()
@@ -76,7 +77,7 @@ app.get("/", async (req, res) => {
 
 
 // Listen port
-const port = process.env.port || 3000
-app.listen(port, () => {
-    console.log("server running at port "+port)
+const PORT = process.env.PORT || 3000
+app.listen(PORT, () => {
+    console.log("server running at port "+PORT)
 })
