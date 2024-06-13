@@ -57,8 +57,12 @@ app.use("/posts", posts)
 
 
 // Render home
-app.get("/", async (req, res) => {
-    var currentUser = await appwriteService.getUser(req.cookies.currentUser.$id)
+app.get("/", authMiddleware, async (req, res) => {
+    try {
+        var currentUser = await appwriteService.getUser(req.cookies.currentUser.$id)
+    } catch (error) {
+        console.log("ERR:", error);
+    }
     if(!currentUser){
         currentUser = {"$id": 0}
     }
@@ -66,7 +70,7 @@ app.get("/", async (req, res) => {
         currentUser: currentUser,
         users: await appwriteService.getUsers(),
         posts: await appwriteService.getPosts(),
-        formatRelativeTime: await formatRelativeTime
+        formatRelativeTime: formatRelativeTime
     })
 })
 
