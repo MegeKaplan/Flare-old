@@ -50,14 +50,14 @@ app.use(cors())
 
 
 // Use routes
-app.use("/users", users)
+app.use("/users", users, authMiddleware)
 app.use("/auth", auth)
 app.use("/feed", feed)
-app.use("/posts", posts)
+app.use("/posts", posts, authMiddleware)
 
 
 // Render home
-app.get("/", authMiddleware, async (req, res) => {
+app.get("/", async (req, res) => {
     try {
         var currentUser = await appwriteService.getUser(req.cookies.currentUser.$id)
     } catch (error) {

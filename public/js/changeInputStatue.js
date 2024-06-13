@@ -30,9 +30,13 @@ imageRadio.onclick = (e) => {
     contentInput.value = ""
     contentInput.placeholder = contentInputPlaceholder
 
-    tagsInput.disabled = false
+    // tagsInput.disabled = false
+    // tagsInput.value = ""
+    // tagsInput.placeholder = tagsInputPlaceholder
+
+    tagsInput.disabled = true
     tagsInput.value = ""
-    tagsInput.placeholder = tagsInputPlaceholder
+    tagsInput.placeholder = disabledInputPlaceholder
 
     fileInputSection.classList.remove("hidden")
 }
@@ -60,9 +64,13 @@ textRadio.onclick = (e) => {
     contentInput.value = ""
     contentInput.placeholder = contentInputPlaceholder
 
-    tagsInput.disabled = false
+    // tagsInput.disabled = false
+    // tagsInput.value = ""
+    // tagsInput.placeholder = tagsInputPlaceholder
+
+    tagsInput.disabled = true
     tagsInput.value = ""
-    tagsInput.placeholder = tagsInputPlaceholder
+    tagsInput.placeholder = disabledInputPlaceholder
 
     fileInputSection.classList.add("hidden")
 }

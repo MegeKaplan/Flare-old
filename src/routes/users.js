@@ -17,7 +17,7 @@ const upload = multer({ storage: storage });
 
 
 
-router.get("/*", authMiddleware)
+// router.get("/*", authMiddleware)
 
 router.get("/", (req, res) => {
     res.redirect("/")

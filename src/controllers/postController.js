@@ -36,7 +36,7 @@ export const postCreate = async (req, res) => {
     if(postData.type != "text"){
         if(req.file){
             // upload post file
-            var postPhotoData = appwriteService.uploadFile(config.appwrite.profilePhotosBucket, req.file)
+            var postPhotoData = appwriteService.uploadFile(config.appwrite.postPhotosBucket, req.file)
             postData.imageUrl = postPhotoData.fileUrl
         }
     }else{
